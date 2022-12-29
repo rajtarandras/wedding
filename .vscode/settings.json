@@ -1,0 +1,119 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "editor.snippetSuggestions": "top",
+  "javascript.preferences.quoteStyle": "double",
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "eslint.validate": ["typescript"],
+  "files.exclude": {
+    "node_modules": true
+  },
+  "search.exclude": {
+    "**/.history": true,
+    "**/*.js": true,
+    "**/*.js.map": true,
+    "**/node_modules": true,
+    "locale/workingDir/": true,
+    "package-lock.json": true,
+    "scripts/localization/gettext": true
+  },
+  "files.associations": {
+    "*.tag": "htmltag",
+    "tsconfig.json": "jsonc"
+  },
+  "files.watcherExclude": {
+    "node_modules": true
+  },
+  "typescriptHero.imports.stringQuoteStyle": "\"",
+  "typescriptHero.imports.multiLineWrapThreshold": 120,
+  "typescriptHero.imports.organizeOnSave": false,
+  "typescriptHero.imports.grouping": ["Remaining", "Plains", "Modules", "Workspace"],
+  "better-comments.multilineComments": true,
+  "better-comments.tags": [
+    {
+      "tag": "!!!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "hack",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "!!",
+      "color": "#FFEA00",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "fixme",
+      "color": "#FFEA00",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "!",
+      "color": "#FF9800",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "todo",
+      "color": "#FF9800",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "???",
+      "color": "#448AFF",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "***",
+      "color": "#00E676",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "note",
+      "color": "#00E676",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "~~",
+      "color": "#474747",
+      "strikethrough": true,
+      "backgroundColor": "transparent"
+    }
+  ],
+  "editor.formatOnPaste": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active"
+}
