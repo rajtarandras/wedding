@@ -116,8 +116,8 @@ export default function Feedback() {
 										</tr>
 									</thead>
 									<tbody>
-										{records.map((r) => (
-											<tr className="bg-gray-100 border-b">
+										{records.map((r, i) => (
+											<tr key={i} className="bg-gray-100 border-b">
 												<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
 													{r.first_name}
 												</td>
@@ -184,8 +184,10 @@ export default function Feedback() {
 									<div className="p-6 space-y-3">
 										<div>Résztvevők:</div>
 										<ul>
-											{selectedRecord?.participant_names.split(",").map((n) => (
-												<li className="ml-4 list-disc">{n}</li>
+											{selectedRecord?.participant_names.split(",").map((n, i) => (
+												<li key={i} className="ml-4 list-disc">
+													{n}
+												</li>
 											))}
 										</ul>
 
