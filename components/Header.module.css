@@ -2,5 +2,5 @@
 	@apply flex justify-between items-center flex-wrap space-x-10 bg-green-primary p-3 fixed w-full z-10 top-0;
 }
 .navitem {
-	@apply px-4 text-xl text-white font-bold italic hover:scale-110 transform;
+	@apply px-2 md:px-4 text-xl text-white font-bold italic hover:scale-110 transform;
 }

@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://rajtarandras-s-workspace-03rl3u.eu-west-1.xata.sh/db/wedding",
+  "codegen": {
+    "output": "xata.ts"
+  }
+}
