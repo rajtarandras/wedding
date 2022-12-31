@@ -4,8 +4,6 @@ import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
 import { RecordVM } from "../models/record";
-import { getDoc, doc } from "firebase/firestore";
-import { database } from "../firebaseConfig";
 
 export default function Feedback() {
 	const part_id = getCookie("part_id");
@@ -17,39 +15,66 @@ export default function Feedback() {
 			email: (document.getElementById("email") as any).value,
 			adults: (document.getElementById("adults") as any).value as number,
 			children: (document.getElementById("children") as any).value as number,
-			infants: (document.getElementById("infants") as any).valu as number,
+			infants: (document.getElementById("infants") as any).value as number,
 			gluten_intolerance: (document.getElementById("gluten_intolerance") as any).checked,
 			lactose_intolerance: (document.getElementById("lactose_intolerance") as any).checked,
 			participant_names: (document.getElementById("participant_names") as any).value,
 			other_intolerance: (document.getElementById("other_intolerance") as any).value,
 		};
 
-		console.log(JSON.stringify(model));
-
-		fetch("/api/add-feedback", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				...model,
-				id: part_id,
-			}),
-		})
-			.then(() => {
-				alert("Success");
-			})
-			.catch((error) => {
-				console.log(error);
+		if (part_id) {
+			const response = await fetch("/api/feedback/update", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					...model,
+					id: part_id,
+				}),
 			});
+
+			const data = await response.json();
+			setRecord({ ...data.feedback } as RecordVM);
+		} else {
+			const response = await fetch("/api/feedback/create", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					adults: model.adults,
+					first_name: model.first_name,
+					email: model.email,
+					children: model.children,
+					infants: model.infants,
+					gluten_intolerance: model.gluten_intolerance,
+					lactose_intolerance: model.lactose_intolerance,
+					participant_names: model.participant_names,
+					other_intolerance: model.other_intolerance,
+				}),
+			});
+
+			const data = await response.json();
+			setRecord({ ...data.feedback } as RecordVM);
+		}
 	};
 
 	const init = async () => {
 		if (part_id) {
-			const singleNote = doc(database, "participations", part_id as string);
-			const data = await getDoc(singleNote);
+			const feedback = await fetch("/api/feedback/get", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					id: part_id,
+				}),
+			});
 
-			setRecord({ ...data.data() } as RecordVM);
+			const data = await feedback.json();
+
+			setRecord({ ...data.feedback } as RecordVM);
 		}
 	};
 

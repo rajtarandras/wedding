@@ -4,19 +4,37 @@ import Header from "../components/Header";
 import Loader from "../components/Loader";
 import { useEffect, useState } from "react";
 import { RecordVM } from "../models/record";
-import { collection, getDocs } from "firebase/firestore";
-import { database } from "../firebaseConfig";
 
 const FULL_PRICE = 16990;
 const CHILD_PRICE = 8500;
 
 export default function Feedback() {
-	const dbInstance = collection(database, "participations");
-
 	const init = async () => {
-		const data = await getDocs(dbInstance);
-		const all: RecordVM[] = data.docs.map((item) => {
-			return { ...item.data() } as RecordVM;
+		const response = await fetch("/api/feedback/search", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const sigle = (
+			await (
+				await fetch("/api/feedback/get", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						id: "rec_cenbupbkpktmbjhl7lo0",
+					}),
+				})
+			).json()
+		).feedback;
+
+		const data = await response.json();
+
+		const all: RecordVM[] = data.feedbacks.map((feedback: any) => {
+			return { ...feedback } as RecordVM;
 		});
 		setRecords(all);
 
@@ -172,11 +190,7 @@ export default function Feedback() {
 												viewBox="0 0 20 20"
 												xmlns="http://www.w3.org/2000/svg"
 											>
-												<path
-													fill-rule="evenodd"
-													d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-													clip-rule="evenodd"
-												></path>
+												<path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"></path>
 											</svg>
 											<span className="sr-only">Close modal</span>
 										</button>
