@@ -1,17 +1,43 @@
 import { NextApiHandler } from "next";
-import { RecordVM } from "../../../models/record";
 import { getXataClient } from "../../../xata";
 
 const handler: NextApiHandler = async (req, res) => {
 	const xata = getXataClient();
-	debugger;
-	const data: RecordVM = JSON.parse(req.body);
-	const feedback = await xata.db.participations.create({
-		...data,
-	});
+	const {
+		email,
+		first_name,
+		last_name,
+		infants,
+		children,
+		adults,
+		lactose_intolerance,
+		gluten_intolerance,
+		participant_names,
+		other_intolerance,
+	} = req.body;
 
-	res.status(201).json({
-		feedback: feedback,
-	});
+	const existing = await xata.db.participations.filter({ email: email }).getFirst();
+	if (existing !== undefined) {
+		res.status(201).json({
+			feedback: existing,
+		});
+	} else {
+		const feedback = await xata.db.participations.create({
+			email: email,
+			first_name: first_name,
+			last_name: last_name,
+			infants: infants,
+			children: children,
+			adults: adults,
+			lactose_intolerance: lactose_intolerance,
+			gluten_intolerance: gluten_intolerance,
+			participant_names: participant_names,
+			other_intolerance: other_intolerance,
+		});
+
+		res.status(201).json({
+			feedback: feedback,
+		});
+	}
 };
 export default handler;

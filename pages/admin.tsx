@@ -17,20 +17,6 @@ export default function Feedback() {
 			},
 		});
 
-		const sigle = (
-			await (
-				await fetch("/api/feedback/get", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						id: "rec_cenbupbkpktmbjhl7lo0",
-					}),
-				})
-			).json()
-		).feedback;
-
 		const data = await response.json();
 
 		const all: RecordVM[] = data.feedbacks.map((feedback: any) => {
@@ -39,15 +25,15 @@ export default function Feedback() {
 		setRecords(all);
 
 		const adults = all.reduce((accumulator, current) => {
-			return accumulator + current.adults;
+			return accumulator + current.adults!;
 		}, 0);
 
 		const children = all.reduce((accumulator, current) => {
-			return accumulator + current.children;
+			return accumulator + current.children!;
 		}, 0);
 
 		const infants = all.reduce((accumulator, current) => {
-			return accumulator + current.infants;
+			return accumulator + current.infants!;
 		}, 0);
 
 		setTotalAdults(adults);
@@ -146,7 +132,7 @@ export default function Feedback() {
 													{r.email}
 												</td>
 												<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-													{r.adults + r.children + r.infants}
+													{r.adults! + r.children! + r.infants!}
 												</td>
 												<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
 													<button
@@ -195,10 +181,10 @@ export default function Feedback() {
 											<span className="sr-only">Close modal</span>
 										</button>
 									</div>
-									<div className="p-6 space-y-3">
+									<div className="p-6 space-y-3 text-gray-900 dark:text-white">
 										<div>Résztvevők:</div>
 										<ul>
-											{selectedRecord?.participant_names.split(",").map((n, i) => (
+											{selectedRecord?.participant_names?.split(",").map((n, i) => (
 												<li key={i} className="ml-4 list-disc">
 													{n}
 												</li>

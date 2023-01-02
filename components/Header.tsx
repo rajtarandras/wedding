@@ -10,7 +10,10 @@ export const Header = () => {
 				<Link href="/" className={styles.navitem}>
 					<Image src="/ring.svg" alt="Főoldal" width={50} height={50} priority />
 				</Link>
-				<div className="flex ">
+				<div className="flex">
+					<Link href="/admin" className={styles.navitem}>
+						<span>Admin</span>
+					</Link>
 					<Link href="/program" className={styles.navitem}>
 						<span>Program</span>
 					</Link>
